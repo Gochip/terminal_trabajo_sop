@@ -135,6 +135,21 @@ setcookie("dir-actual", $dir_actual);
                 $("#modal-ejercicios").modal("hide");
             });
             
+            $("#btn-cerrar-sesion").click(function() {
+                $.ajax({
+                    url: "cerrar_sesion.php",
+                    type: "get",
+                    data: {},
+                    success: function (event) {
+                        location.href = "";
+                    }
+                });
+            });
+            
+            $("#btn-aceptar-bienvenida").click(function() {
+                $("#modal-bienvenida").modal("hide");
+            });
+            
             $("#btn-confirmar-inicio").click(function() {
                 var nombre = $("#txt-nombre").val();
                 if (nombre.length > 3) {
@@ -146,7 +161,7 @@ setcookie("dir-actual", $dir_actual);
                         },
                         success: function (event) {
                             $modalInicio.modal("hide");
-                            alert("Éxito");
+                            $("#modal-bienvenida").modal("show");
                             setNombreUsuario();
                             setIdContenedor();
                             setDirActual();
@@ -221,6 +236,14 @@ setcookie("dir-actual", $dir_actual);
                 setDirActual();
                 $("#txt-comando-a-enviar").focus();
             }
+            
+            $(document).ajaxStart(function() {
+                $("#div-cargando").removeClass("d-none");
+            });
+            
+            $(document).ajaxStop(function() {
+                $("#div-cargando").addClass("d-none");
+            });
         });
         
     </script>
@@ -230,7 +253,8 @@ setcookie("dir-actual", $dir_actual);
     <h6 class="indicador" style="font-family: monospace">
         <span class="d-none d-sm-block">Terminal de trabajo | UTN - FRC | Sistemas Operativos</span>
     </h6>
-    <button type="button" id="btn-ejercicios" class="btn btn-primary" style="float: right; margin-top: 5px">Ejemplos</button>
+    <button type="button" id="btn-cerrar-sesion" class="btn btn-danger" style="float: right; margin-top: 5px; margin-left: 5px">Cerrar sesión</button>
+    <button type="button" id="btn-ejercicios" class="btn btn-primary" style="float: right; margin-top: 5px">Ejercicios</button>
 </div>
 <div class="container-fluid">
     <div class="row">
@@ -248,6 +272,10 @@ setcookie("dir-actual", $dir_actual);
     </div>
 </div>
 
+<div id="div-cargando" class="d-none" style="height: 100%; width: 100%; background-color: rgba(100,100,100,0.4); position: fixed; z-index: 2000; top: 0px; left: 0px">
+    <div class="spinner-border text-light" style="left: 20px; position: absolute; top: 20px;"></div>
+</div>
+
 <div class="modal" tabindex="-1" role="dialog" id="modal-inicio" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -262,6 +290,29 @@ setcookie("dir-actual", $dir_actual);
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" id="btn-confirmar-inicio">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="modal-bienvenida" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Éxito</h5>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+            <p>
+                Se te ha creado con éxito una sesión de trabajo para que practiques algunos comandos. En la barra superior tenés un botón para ver algunos ejercicios.
+            </p>
+            <p>
+                Atención: Si no usas la sesión de trabajo durante 20 minutos, la misma se desactivará. Asimismo, cuando dejes de usarla hacé clic en "Cerrar sesión" así sabemos que ya terminaste de probar y podemos liberar ese espacio.
+            </p>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="btn-aceptar-bienvenida">Aceptar</button>
       </div>
     </div>
   </div>
