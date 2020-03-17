@@ -133,6 +133,7 @@ setcookie("dir-actual", $dir_actual);
             
             $("#btn-aceptar-ejercicios").click(function() {
                 $("#modal-ejercicios").modal("hide");
+                $txtComandoAEnviar.focus();
             });
             
             $("#btn-cerrar-sesion").click(function() {
@@ -254,7 +255,7 @@ setcookie("dir-actual", $dir_actual);
         <span class="d-none d-sm-block">Terminal de trabajo | UTN - FRC | Sistemas Operativos</span>
     </h6>
     <button type="button" id="btn-cerrar-sesion" class="btn btn-danger" style="float: right; margin-top: 5px; margin-left: 5px">Cerrar sesión</button>
-    <button type="button" id="btn-ejercicios" class="btn btn-primary" style="float: right; margin-top: 5px">Ejercicios</button>
+    <button type="button" id="btn-ejercicios" class="btn btn-primary" style="float: right; margin-top: 5px">Tutorial</button>
 </div>
 <div class="container-fluid">
     <div class="row">
@@ -322,12 +323,15 @@ setcookie("dir-actual", $dir_actual);
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Ejercicios</h5>
+        <h5 class="modal-title">Tutorial</h5>
       </div>
       <div class="modal-body">
         <div class="form-group">
-            <p>Aprender a listar archivos:</p>
-            <p>Escriba el comando ls para listar los archivos.</p>
+            <p>En Linux, al igual que Windows, los archivos se organizan en carpetas, solo que aquí se le llaman directorios.</p>
+            <p>Para listar los archivos se debe ejecutar el comando: <pre>ls</pre> esto significa que tienes que escribir ls y pulsar enter.</p>
+            <p>¡Inténtalo ahora!</p>
+            <p>Deberías haber visto una lista de archivos que podrían ser directorios.</p>
+            <p>Ahora prueba: <pre>ls -l</pre></p>
           </div>
       </div>
       <div class="modal-footer">
