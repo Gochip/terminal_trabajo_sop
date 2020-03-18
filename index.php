@@ -15,6 +15,9 @@ setcookie("dir-actual", $dir_actual);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/introjs.min.css">
+    <link rel="stylesheet" href="intro.js-2.9.3/themes/introjs-dark.css">
+
     <style type="text/css">
         .barra-superior {
             position: fixed;
@@ -62,8 +65,22 @@ setcookie("dir-actual", $dir_actual);
         [contenteditable="true"].single-line:focus {
             outline: none;
         }
+        .introjs-skipbutton {
+            color: black!important;
+        }
+        .introjs-button {
+            text-shadow: none;
+        }
+        .introjs-prevbutton {
+            color: black!important;
+            text-shadow: none;
+        }
+        .introjs-nextbutton {
+            color: black!important;
+            text-shadow: none;
+        }
     </style>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.min.js"></script>
 
     <script src="https://pabex.com.ar/assets/js/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -81,6 +98,13 @@ setcookie("dir-actual", $dir_actual);
             var $divConsola = $("#div-consola");
         
             // Eventos.
+            
+            $divConsola.click(function(ev) {
+                console.log(ev);
+                if (ev.toElement.id === "div-consola") {
+                    $("#txt-comando-a-enviar").focus();
+                }
+            });
             
             $(document).on("keypress", "#txt-comando-a-enviar", function() {
                 if (event.keyCode === 13) {
@@ -149,6 +173,7 @@ setcookie("dir-actual", $dir_actual);
             
             $("#btn-aceptar-bienvenida").click(function() {
                 $("#modal-bienvenida").modal("hide");
+                empezarTutorialInteractivo();
             });
             
             $("#btn-confirmar-inicio").click(function() {
@@ -173,7 +198,20 @@ setcookie("dir-actual", $dir_actual);
                 }
             });
             
+            
+            
             // Funciones.
+            function empezarTutorialInteractivo() {
+                var intro = introJs();
+                intro.setOptions({
+                    prevLabel: "Volver",
+                    nextLabel: "Siguiente",
+                    skipLabel: "Salir",
+                    doneLabel: "Listo"
+                });
+                intro.start();
+            }
+            
             function getCookie(cname) {
                 var name = cname + "=";
                 var decodedCookie = decodeURIComponent(document.cookie);
@@ -203,7 +241,6 @@ setcookie("dir-actual", $dir_actual);
             
             function setDirActual() {
                 var dirActual = getCookie("dir-actual");
-                console.log(dirActual);
                 $("#dir-actual").text(dirActual);
             }
             
@@ -236,6 +273,7 @@ setcookie("dir-actual", $dir_actual);
                 setIdContenedor();
                 setDirActual();
                 $("#txt-comando-a-enviar").focus();
+                empezarTutorialInteractivo();
             }
             
             $(document).ajaxStart(function() {
@@ -261,9 +299,9 @@ setcookie("dir-actual", $dir_actual);
     <div class="row">
         <div id="div-consola" class="col-sm-12" style="background-color: rgba(0,0,0,0.8); height: 90%; padding-top: 50px; padding-bottom: 38px; min-height: 100vh;">
             <div style="display: inline-block" class="shell clone">                
-                <span class="texto-consola nombre-usuario">gochi</span>
-                <span class="texto-consola separador">@</span>
-                <span class="texto-consola id-contenedor">lenovo</span>
+                <span class="texto-consola nombre-usuario" data-step="1" data-intro="Acá está el nombre de usuario.">gochi</span>
+                <span class="texto-consola separador" data-step="3" data-intro="Esto es simplemente un separador.">@</span>
+                <span class="texto-consola id-contenedor" data-step="2" data-intro="Esto es el nombre del host, es decir, la computadora a la que estás conectado.">sop</span>
                 <span class="texto-consola separador">:</span>
                 <span class="texto-consola dir-actual" id="dir-actual">/</span>
                 <span class="texto-consola prompt">$</span>
