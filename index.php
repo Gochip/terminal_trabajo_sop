@@ -178,7 +178,7 @@ setcookie("dir-actual", $dir_actual);
             
             $("#btn-confirmar-inicio").click(function() {
                 var nombre = $("#txt-nombre").val();
-                if (nombre.length > 3) {
+                if (nombre.length > 2) {
                     $.ajax({
                         url: "crear_contenedor.php",
                         type: "post",
@@ -194,7 +194,7 @@ setcookie("dir-actual", $dir_actual);
                         }
                     });
                 } else {
-                    alert("Complete su nombre para poder confirmar");
+                    alert("Complete su nombre para poder confirmar. Debe tener más de 2 caracteres.");
                 }
             });
             
@@ -207,7 +207,7 @@ setcookie("dir-actual", $dir_actual);
                     prevLabel: "Volver",
                     nextLabel: "Siguiente",
                     skipLabel: "Salir",
-                    doneLabel: "Listo"
+                    doneLabel: "Finalizar"
                 });
                 intro.start();
             }
@@ -298,15 +298,15 @@ setcookie("dir-actual", $dir_actual);
 <div class="container-fluid">
     <div class="row">
         <div id="div-consola" class="col-sm-12" style="background-color: rgba(0,0,0,0.8); height: 90%; padding-top: 50px; padding-bottom: 38px; min-height: 100vh;">
-            <div style="display: inline-block" class="shell clone">                
-                <span class="texto-consola nombre-usuario" data-step="1" data-intro="Acá está el nombre de usuario.">gochi</span>
-                <span class="texto-consola separador" data-step="3" data-intro="Esto es simplemente un separador.">@</span>
-                <span class="texto-consola id-contenedor" data-step="2" data-intro="Esto es el nombre del host, es decir, la computadora a la que estás conectado.">sop</span>
-                <span class="texto-consola separador">:</span>
-                <span class="texto-consola dir-actual" id="dir-actual">/</span>
-                <span class="texto-consola prompt">$</span>
+            <div style="display: inline-block" class="shell clone" data-step="1" data-intro="Esto que ves acá, se llama prompt. Veremos cada parte, continúa.">                
+                <span class="texto-consola nombre-usuario" data-step="2" data-intro="Acá está el nombre de usuario.">gochi</span>
+                <span class="texto-consola separador" data-step="4" data-intro="Esto es simplemente un separador.">@</span>
+                <span class="texto-consola id-contenedor" data-step="3" data-intro="Esto es el nombre del host, es decir, la computadora a la que estás conectado.">sop</span>
+                <span class="texto-consola separador" data-step="6" data-intro="Estos dos puntos es otro separador.">:</span>
+                <span class="texto-consola dir-actual" id="dir-actual" data-step="5" data-intro="Esta barra indica el directorio actual, es decir, en qué lugar estás posicionado.">/</span>
+                <span class="texto-consola prompt" data-step="7" data-intro="Este caracter indica que a continuación se puede escribir un comando.">$</span>
             </div>
-            <div class="texto-consola txt-comando-a-enviar single-line clone " id="txt-comando-a-enviar" contenteditable="true" style="display: inline-block; line-height: 30px; vertical-align: middle;"></div>
+            <div class="texto-consola txt-comando-a-enviar single-line clone" data-step="8" data-intro="Acá se escriben los comandos. Finalizá y hacé clic en el botón Tutorial para empezar a escribir comandos." id="txt-comando-a-enviar" contenteditable="true" style="display: inline-block; line-height: 30px; vertical-align: middle;"></div>
         </div>
     </div>
 </div>
@@ -343,10 +343,11 @@ setcookie("dir-actual", $dir_actual);
       <div class="modal-body">
         <div class="form-group">
             <p>
-                Se te ha creado con éxito una sesión de trabajo para que practiques algunos comandos. En la barra superior tenés un botón para ver algunos ejercicios.
+                Se te ha creado con éxito una sesión de trabajo en Linux para que practiques algunos comandos.
+                Esta sesión de trabajo consiste de una terminal de Linux y, a partir de ella, ¡podrás empezar a utilizar un Linux sin instalar nada!
             </p>
             <p>
-                Atención: Si no usas la sesión de trabajo durante 20 minutos, la misma se desactivará. Asimismo, cuando dejes de usarla hacé clic en "Cerrar sesión" así sabemos que ya terminaste de probar y podemos liberar ese espacio.
+                Atención: Si no usas la sesión de trabajo durante 20 minutos, la misma se desactivará. Asimismo, cuando dejes de usarla hacé clic en "Cerrar sesión" así sabemos que ya terminaste de probar y podemos liberar este espacio.
             </p>
           </div>
       </div>
@@ -366,8 +367,8 @@ setcookie("dir-actual", $dir_actual);
       <div class="modal-body">
         <div class="form-group">
             <p>En Linux, al igual que Windows, los archivos se organizan en carpetas, solo que aquí se le llaman directorios.</p>
-            <p>Para listar los archivos se debe ejecutar el comando: <pre>ls</pre> esto significa que tienes que escribir ls y pulsar enter.</p>
-            <p>¡Inténtalo ahora!</p>
+            <p>Para listar los archivos se debe ejecutar el comando: <pre>ls</pre> esto significa que tenés que escribir ls y pulsar enter.</p>
+            <p>¡Intentalo ahora!</p>
             <p>Deberías haber visto una lista de archivos que podrían ser directorios.</p>
             <p>Ahora prueba: <pre>ls -l</pre></p>
           </div>
